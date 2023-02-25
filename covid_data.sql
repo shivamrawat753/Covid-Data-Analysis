@@ -1,29 +1,3 @@
-select location, date, total_cases, new_cases, total_deaths, population
-from Portfolio_Projects..covid_data
-order by 1,2
-
-select continent, MAX(total_deaths) as TD
-from Portfolio_Projects..covid_data
-where continent is not null
-group by continent
-order by TD DESC
-
-select location, date, total_cases, new_cases, total_deaths, new_deaths
-from Portfolio_Projects..covid_data
-where location = 'India'
-order by date desc
-
-
-
-select Distinct(location), population
-from Portfolio_Projects..covid_data
-where continent is not null
-order by population DESC
-
-select sum(Distinct(population))
-from Portfolio_Projects..covid_data
-where continent is not null
-
 --1.Global - Total confirmed cases, Total deaths, Mortality rate
 
 select sum(new_cases) as Total_Cases, sum(cast(new_deaths as int)) as Total_Deaths, 
@@ -50,8 +24,6 @@ select date, sum(total_cases) as TotalCases, sum(new_cases) as NewCases, (sum(ne
 from Portfolio_Projects..covid_data
 group by date
 order by date desc
-
-
 
 --4.Last 7 days - new confirmed cases, deaths and vaccinations
 
@@ -119,24 +91,51 @@ from PercentagePeopleVaccinated
 
 ---
 
-1.  ```
+*  ```
 	SELECT *
     ->FROM Portfolio_Projects..covid_data
     ->ORDER BY 3,4 ;
     ```
 	
-2.  ```
-	SELECT emp.name AS name, dept.name AS department
-    -> FROM emp, dept
-    -> WHERE emp.dnum = dept.dnum
-    -> AND emp.tax = 0 ;
+*  ```
+	select location, date, total_cases, new_cases, total_deaths, population
+    ->from Portfolio_Projects..covid_data
+    ->order by 1,2
+   ```
+
+*  ```
+	select continent, MAX(total_deaths) as TD
+	->from Portfolio_Projects..covid_data
+	->where continent is not null
+	->group by continent
+	->order by TD DESC
+   ```
+
+*  ```
+	select location, date, total_cases, new_cases, total_deaths, new_deaths
+	->from Portfolio_Projects..covid_data
+	->where location = 'India'
+	->order by date desc
+   ```
+
+*  ```
+	select Distinct(location), population
+	->from Portfolio_Projects..covid_data
+	->where continent is not null
+	->order by population DESC
+   ```
+   
+*  ```   
+	select sum(Distinct(population))
+	->from Portfolio_Projects..covid_data
+	->where continent is not null
     ```
 	
-3.  ```
-	SELECT supplier.snum AS snum, supplier.name AS name, SUM( supply.qty ) AS tot_qty
-    -> FROM supplier, supply
-    -> WHERE supplier.snum = supply.snum
-    -> GROUP BY snum ;
+---1. Global - Total confirmed cases, Total deaths, Mortality rate
+   ```
+	select sum(new_cases) as Total_Cases, sum(cast(new_deaths as int)) as Total_Deaths, 
+	(sum(cast(new_deaths as int))/sum(new_cases))*100 as Mortality_rate
+	->from Portfolio_Projects..covid_data
     ```
 	
 4.  ```
