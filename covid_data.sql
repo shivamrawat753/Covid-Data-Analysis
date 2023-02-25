@@ -1,12 +1,3 @@
-select *
-from Portfolio_Projects..covid_data
-order by 3,4
-
-select *
-from Portfolio_Projects..covid_data
-where location = 'India'
-order by 3,4
-
 select location, date, total_cases, new_cases, total_deaths, population
 from Portfolio_Projects..covid_data
 order by 1,2
